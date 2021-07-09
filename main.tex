@@ -1,0 +1,70 @@
+% Basierend auf https://www.zar.kit.edu/downloads/Allgemeines/Leitfaden%20zur%20Erstellung%20juristischer%20Se.pdf
+% Stand: Sommersemester 2021
+
+% Standardpakete
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{hyperref}
+\usepackage{csquotes}
+
+% Abmessungen, Font
+\usepackage[a4paper, left=3cm, right=3cm, top=3cm, bottom=3cm]{geometry}
+\usepackage[OT1]{fontenc}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage{setspace}
+\onehalfspacing
+
+% Gliederung
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+\renewcommand{\thesection}{\Alph{section}.} % A.
+\renewcommand{\thesubsection}{\Roman{subsection}.} % I.
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}.} % 1.
+\renewcommand{\theparagraph}{\alph{paragraph})} % a)
+\renewcommand{\thesubparagraph}{\alph{paragraph}\alph{subparagraph})}  % aa)
+
+% Literatur
+% Siehe folgende Doku für Weitere Zitattypen:
+% https://ftp.agdsn.de/pub/mirrors/latex/dante/macros/latex/contrib/biblatex-contrib/biblatex-juradiss/doc/biblatex-juradiss.pdf
+\usepackage[
+    style=biblatex-juradiss,
+    sorting=anyt % Alhabetisches Label, Name, Jahr, Titel
+]{biblatex}
+\addbibresource{main.bib}
+
+\begin{document}
+% Aktivieren, falls Text im schmalen Textkörper nicht umgebrochen wird.
+% \emergencystretch=1em
+
+% Deckblatt, römische Zahlen
+\pagenumbering{roman}
+\input{00_title}
+
+% Gliederung
+\renewcommand{\contentsname}{Gliederung}
+\tableofcontents
+\newpage
+
+% Ab jetzt Korrekturrand
+\newgeometry{left=3cm, right=6cm, top=3cm, bottom=3cm}
+% Ab jetzt mit arabischen Seitenzahlen weiter
+\pagenumbering{arabic}
+
+% Der Inhalt. Pro Bearbeiter 15 bis 20 Seiten.
+\input{01_einleitung}
+\input{98_fazit}
+
+% Literaturverzeichnis
+\newpage
+\restoregeometry
+\pagenumbering{roman}
+
+% Urteile und Gerichtsurteile kommen nicht ins Literaturverzeichnis
+\printbibliography[heading=bibnumbered,nottype=jurisdiction,nottype=legal]
+
+% Bitte nicht vergessen zu unterschreiben.
+% Bitte die aktuelle Erklärung aus deiner Prüfungsordnung nehmen. (Hier Info SPO 2015).
+\input{99_erklaerung}
+
+\end{document}
